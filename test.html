@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>No to word</title>
+    <style>
+        input[type=text] {
+            width: 35%;
+
+        }
+
+        h6 {
+            margin-left: 12%;
+        }
+
+        button {
+            margin-left: 320px;
+        }
+
+        #clear {
+            margin-left: -5px;
+        }
+
+        textarea {
+            width: 35%;
+            height: 100px;
+            border-radius: 5px;
+        }
+
+        select {
+            margin-left: 1%;
+            width: 150px;
+            height: 25px;
+        }
+
+        /* input[type=radio]
+        {
+            margin-left: 60%;
+        } */
+        .header {
+            border: 2px solid;
+            width: 25%;
+            height: 40px;
+            margin-left: 15%;
+            border-radius: 5px;
+            background-color: #B64B39;
+            font-weight: bold;
+            color: oldlace;
+            text-align: center;
+            padding: 0.3em;
+        }
+
+        .main {
+            background: #f0f0f0;
+            padding: 0.5em 0.5em 0.5em 0.5em;
+            border: 2px solid #aaa;
+            /* border-radius: 4px; */
+            font-size: 0.9em;
+            width: 100%;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .titlecase {
+            text-transform: capitalize;
+        }
+
+        .lowercase {
+            text-transform: lowercase;
+        }
+
+        .sentencecase {
+            text-transform: lowercase;
+        }
+
+        .sentencecase::first-letter {
+            text-transform: uppercase;
+        }
+
+        #output {
+            width: 450px;
+            background: #fff;
+            padding: 13px;
+            min-height: 114px;
+            border-radius: 10px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <div class="main">
+        <div class="header">
+            <center>Number To Words Calculator</center>
+        </div>
+        <br>
+        <div class="container">
+            <!-- <form> -->
+
+            <h6>Convert This Number</h6>
+            <input type="text" id="number" class="form-control">
+            <br>
+
+            <!-- radio button -->
+            <!-- <input type="radio" id="to" value="1">Words
+        <input type="radio" id="to" value="2">Currency
+        <input type="radio" id="to" value="3">Check-Writing -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="word" id="word" value="1" checked>
+                <label class="form-check-label" for="word">
+                    Words
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="word" id="currency" value="2">
+                <label class="form-check-label" for="currency">
+                    Currency
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="word" id="writing" value="3">
+                <label class="form-check-label" for="writing">
+                    Check-Writing
+                </label>
+            </div>
+
+            <!-- dorpdown -->
+            <label for="floatingTextarea2" style="margin-left: 15%;">Letter Case:</label>
+            <select id="myselect" onchange="myfunction()">
+
+                <option value="1" selected>lowercase</option>
+                <option value="2">UPPERCASE</option>
+                <option value="3">Title Case</option>
+                <option value="4">Sentence case</option>
+            </select>
+            <br>
+
+            <br>
+            <button onclick="clearfun()" class="btn btn-secondary btn-sm" id="clear">Clear</button>
+            <button onclick="myfunction()" class="btn btn-secondary btn-sm">Calculate</button>
+            <br>
+            <br>
+            <div id="output">Answer:</div>
+        </div>
+    </div>
+    <script>
+
+
+
+        function clearfun() {
+            let number = document.getElementById("number").value = ' ';
+            let ans = document.getElementById("output").value = ' ';
+            let select1 = document.getElementById("word").value = ' ';
+            let select2 = document.getElementById("currency").value = ' ';
+            let select3 = document.getElementById("writing").value = ' ';
+            // let dropdown=document.getElementById("myselect").value=' ';
+        }
+
+
+
+        var no = document.getElementById("number").value;
+        // var select=document.getElementById("to").value;
+
+        // console.log(select);
+
+        function myfunction() {
+            var no = document.getElementById("number").value;
+            if (document.getElementById("number").value == ' ') {
+                alert("please Enter Number");
+            }
+
+            if (document.getElementById("word").checked == true) {
+                let x = document.getElementById("myselect").value;
+                switch (x) {
+                    case "1":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "lowercase";
+                        break;
+
+                    case "2":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "uppercase";
+
+                        break;
+
+                    case "3":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "titlecase";
+                        break;
+                    case "4":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "sentencecase";
+                        break;
+                    default:
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "lowercase";
+                        break;
+                }
+                console.log("word selected");
+
+            }
+            if (document.getElementById("currency").checked == true) {
+                console.log("currency selected");
+                let x = document.getElementById("myselect").value;
+                switch (x) {
+                    case "1":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word + " dollars ";
+                        document.getElementById("output").className = "lowercase";
+                        break;
+
+                    case "2":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word + " dollars ";
+                        document.getElementById("output").className = "uppercase";
+
+                        break;
+
+                    case "3":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word + " dollars ";
+                        document.getElementById("output").className = "titlecase";
+                        break;
+                    case "4":
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word + " dollars ";
+                        document.getElementById("output").className = "sentencecase";
+                        break;
+                    default:
+                        var word = convert(no);
+                        document.getElementById("output").innerHTML = word + " dollars ";
+                        document.getElementById("output").className = "lowercase";
+                        break;
+                }
+
+            }
+            if (document.getElementById("writing").checked == true) {
+                console.log("writing selected");
+                let x = document.getElementById("myselect").value;
+                switch (x) {
+                    case "1":
+                        var word = convert(no) + " dollars" + "\nor\n" + convert(no) + " 00/100 " + "dollars";
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "lowercase";
+                        break;
+
+                    case "2":
+                        var word = convert(no) + " dollars" + "\nor\n" + convert(no) + " 00/100 " + "dollars";
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "uppercase";
+
+                        break;
+
+                    case "3":
+                        var word = convert(no) + " dollars" + "\nor\n" + convert(no) + " 00/100 " + "dollars";
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "titlecase";
+                        break;
+                    case "4":
+                        var word = convert(no) + " dollars" + "\nor\n" + convert(no) + " 00/100 " + "dollars";
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "sentencecase";
+                        break;
+                    default:
+                        var word = convert(no) + " dollars" + "\nor\n" + convert(no) + " 00/100 " + "dollars";
+                        document.getElementById("output").innerHTML = word;
+                        document.getElementById("output").className = "lowercase";
+                        break;
+                }
+            }
+        }
+        function fun(n) {
+            var str = "";
+            var my1 = [' ', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+            var my2 = ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+            if (n < 20) {
+                str = my1[n];
+            }
+            else if (n >= 20 && n <= 100) {
+                let div1 = Math.trunc(n / 10);
+                // var div2=Math.trunc(n%10);
+                //  console.log("division:"+my1[div2]);
+                str = my2[div1] + ' ' + my1[n % 10];
+
+            }
+            return str;
+        }
+        function convert(no) {
+            var ss = "";
+            if (no < 100) {
+                ss = fun(no);
+            }
+            else if (no >= 100 && no < 1000) {
+                let div = Math.trunc(no / 100);
+                ss = fun(div) + " hundred " + convert(no % 100);
+            }
+            else if (no >= 1000 && no < 100000) {
+                let div = Math.trunc(no / 1000);
+                // console.log(div);
+                ss = fun(div) + " thousand " + convert(no % 1000);
+            }
+            else if (no >= 100000 && no <= 900000) {
+
+                let div = Math.trunc(no / 100000);
+
+                if (no / 100000 == "1" || no / 100000 == "2" || no / 100000 == "3" || no / 100000 == "4" || no / 100000 == "5" || no / 100000 == "6" || no / 100000 == "7" || no / 100000 == "8" || no / 100000 == "9") {
+                    ss = fun(div) + " hundred " + convert(no % 100000) + " thousand ";
+                }
+                else if (no % 1000 >= 10 && no % 1000 <= 999) {
+                    ss = fun(div) + " hundred thousand " + convert(no % 100000);
+                }
+                else {
+                    ss = fun(div) + " hundred " + convert(no % 100000);
+                }
+            }
+            else if (no >= 1000000 && no < 10000000) {
+                let div = Math.trunc(no / 1000000);
+                // console.log(div);
+                ss = fun(div) + " million " + convert(no % 1000000);
+            }
+            else if (no >= 10000000 && no < 100000000) {
+                let div = Math.trunc(no / 1000000);
+                // console.log(div);
+                ss = fun(div) + " million " + convert(no % 1000000);
+            }
+            else if (no >= 100000000 && no < 1000000000) {
+                let div = Math.trunc(no / 100000000);
+                if(no%100000000=="1"||no%100000000=="2"||no%100000000=="3"||no%100000000=="4"||no%100000000=="5"||no%100000000=="6"||no%100000000=="7"||no%100000000=="8"||no%100000000=="9")
+                {
+                    ss = fun(div) + " hundred million "+convert(no % 100000000);
+                }
+
+                else if (no % 10000000 >= 10 && no % 10000000 < 9999999) {
+                    ss = fun(div) + " hundred million " + convert(no % 100000000);
+                }
+
+                // console.log(div);
+                else {
+                    ss = fun(div) + " hundred " + convert(no % 100000000) + " million ";
+                }
+            }
+            else if (no >= 1000000000 && no < 10000000000) {
+                let div = Math.trunc(no / 1000000000);
+                // console.log(div);
+                ss = fun(div) + " billion " + convert(no % 1000000000);
+            }
+            else if (no >= 10000000000 && no < 100000000000) {
+                let div = Math.trunc(no / 1000000000);
+                // console.log(div);
+                ss = fun(div) + " billion " + convert(no % 10000000000);
+            }
+            else if (no >= 100000000000 && no < 1000000000000) {
+                let div = Math.trunc(no / 100000000000);
+                // console.log(div);
+                 if(no%1000000000000>=10 && no%100000000000<9999999999999)
+                {
+                    ss = fun(div) + " hundred billion " + convert(no % 100000000000) ;      
+                }
+                else
+                {
+                 ss = fun(div) + " hundred " + convert(no % 100000000000) + " billion ";
+                }
+            }
+            else if (no >= 1000000000000 && no < 10000000000000) {
+                let div = Math.trunc(no / 1000000000000);
+                // console.log(div);
+                ss = fun(div) + " trillion " + convert(no % 1000000000000);
+            }
+            else if (no >= 10000000000000 && no < 100000000000000) {
+                let div = Math.trunc(no / 1000000000000);
+                // console.log(div);
+                ss = fun(div) + " trillion " + convert(no % 10000000000000);
+            }
+            else if (no >= 100000000000000 && no < 1000000000000000) {
+                let div = Math.trunc(no / 100000000000000);
+                // console.log(div);
+                ss = fun(div) + " hundred " + convert(no % 100000000000000) + " trillion ";
+            }
+            else if (no >= 1000000000000000 && no < 10000000000000000) {
+                let div = Math.trunc(no / 1000000000000000);
+                // console.log(div);
+                ss = fun(div) + " quadrillion " + convert(no % 1000000000000000);
+            }
+            else if (no >= 10000000000000000 && no < 100000000000000000) {
+                let div = Math.trunc(no / 1000000000000000);
+                // console.log(div);
+                ss = fun(div) + " quadillion " + convert(no % 10000000000000000);
+            }
+            else if (no >= 100000000000000000 && no < 1000000000000000000) {
+                let div = Math.trunc(no / 100000000000000000);
+                // console.log(div);
+                ss = fun(div) + " hundred " + convert(no % 100000000000000000) + "quadrillion";
+            }
+            else {
+                let div = Math.trunc(no / 1000000000000000000);
+                // console.log(div);
+                ss = fun(div) + " quintillion " + convert(no % 1000000000000000000);
+            }
+
+            return ss;
+        }
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
